@@ -5,9 +5,9 @@ Usage:
   voices.py VOICE STORY ROBOTIP 
   voices.py (-h | --help)
 Examples:
-  voices.py cartoon BoyWhoCriedWolf 141.219.141.219 
-  voices.py robot Goldilocks 141.219.141.219 
-  voices.py natural ThreePigs 141.219.141.219
+  voices.py cartoon boywhocriedwolf 141.219.141.219 
+  voices.py robot goldilocks 141.219.141.219 
+  voices.py natural threepigs 141.219.141.219
 Options:
   -h, --help
 """
@@ -34,11 +34,10 @@ def main(arguments):
     audio = ALProxy("ALAudioPlayer", robotIP, port)
 
     #Need to have files on Nao to play
-    #fileName = "/usr/share/naoqi/wav/random.wav"
-    fileName = "audio/" + voice + "/" + story + ".wav"
-
-    fileID = audio.playFile(fileName)
-
+    for i in range(7):
+      fileName = "/var/persistent/home/nao/voicesaudio/" + voice + "/" + story + str(i+1) + ".wav"
+      fileID = audio.playFile(fileName)
+      pause = raw_input("Press enter to continue")
 
 if __name__ == "__main__":
     arguments = docopt(__doc__)
